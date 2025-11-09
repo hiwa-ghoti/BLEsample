@@ -94,18 +94,35 @@ function Leafony() {
         let decoder = new TextDecoder( 'utf-8' );
         data = decoder.decode( data );
         data = data.replace( /\r?\n/g, '' );
-        data = data.split( ',' );
 
-        state.devn = deviceName;
-        state.unin = uniqueName;
-        state.temp = data[0];
-        state.humd = data[1];
-        state.illm = data[2];
-        state.tilt = data[3];
-        state.batt = data[4];
-        state.dice = data[5];
+        if (nextdata === "date") {
+            state.temp = data;
+            nextdata = "lat";
+            counter++;
+        } else if (nextdata === "lat") {
+            state.humd = data;
+            nextdata = "lon";
+            counter++;
+        } else if (nextdata === "lon") {
+            state.illm = data;
+            // gpsDataSet.push( state );
+            nextdata = "date";
+            counter++;
+        }
 
-        onStateChangeCallback( state );
+        // state.devn = deviceName;
+        // state.unin = uniqueName;
+        // state.temp = data[0];
+        // state.humd = data[1];
+        // state.illm = data[2];
+        // state.tilt = data[3];
+        // state.batt = data[4];
+        // state.dice = data[5];
+        if ( counter === 3 ) {
+                onStateChangeCallback( state );
+                counter = 0;
+                state = {};
+        }
 
         // let data = event.target.value;
         // let decoder = new TextDecoder( 'utf-8' );
