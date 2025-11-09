@@ -90,50 +90,50 @@ function Leafony() {
      */
     function handleData( event ) {
         
-        // let data = event.target.value;
-        // let decoder = new TextDecoder( 'utf-8' );
-        // data = decoder.decode( data );
-        // data = data.replace( /\r?\n/g, '' );
-        // data = data.split( ',' );
-
-        // state.devn = deviceName;
-        // state.unin = uniqueName;
-        // state.temp = data[0];
-        // state.humd = data[1];
-        // state.illm = data[2];
-        // state.tilt = data[3];
-        // state.batt = data[4];
-        // state.dice = data[5];
-
-        // onStateChangeCallback( state );
-
         let data = event.target.value;
         let decoder = new TextDecoder( 'utf-8' );
         data = decoder.decode( data );
-        data = data.replace( /\r?\n/g, '' );        //data内の改行コードを削除
+        data = data.replace( /\r?\n/g, '' );
+        data = data.split( ',' );
 
-        if (nextdata === "date") {
-            state.devn = deviceName;
-            state.unin = uniqueName;
-            state.measurementDateTime = data;
-            nextdata = "lat";
-            counter++;
-        } else if (nextdata === "lat") {
-            state.latitude = data;
-            nextdata = "lon";
-            counter++;
-        } else if (nextdata === "lon") {
-            state.longitude = data;
-            gpsDataSet.push( state );
-            nextdata = "date";
-            counter++;
-        }
+        state.devn = deviceName;
+        state.unin = uniqueName;
+        state.temp = data[0];
+        state.humd = data[1];
+        state.illm = data[2];
+        state.tilt = data[3];
+        state.batt = data[4];
+        state.dice = data[5];
 
-        if ( counter === 3 ) {
-            counter = 0;
-            onStateChangeCallback( state );
-            state = {};
-        }
+        onStateChangeCallback( state );
+
+        // let data = event.target.value;
+        // let decoder = new TextDecoder( 'utf-8' );
+        // data = decoder.decode( data );
+        // data = data.replace( /\r?\n/g, '' );        //data内の改行コードを削除
+
+        // if (nextdata === "date") {
+        //     state.devn = deviceName;
+        //     state.unin = uniqueName;
+        //     state.measurementDateTime = data;
+        //     nextdata = "lat";
+        //     counter++;
+        // } else if (nextdata === "lat") {
+        //     state.latitude = data;
+        //     nextdata = "lon";
+        //     counter++;
+        // } else if (nextdata === "lon") {
+        //     state.longitude = data;
+        //     gpsDataSet.push( state );
+        //     nextdata = "date";
+        //     counter++;
+        // }
+
+        // if ( counter === 3 ) {
+        //     counter = 0;
+        //     onStateChangeCallback( state );
+        //     state = {};
+        // }
         
 
         if ( enSleep ) {
