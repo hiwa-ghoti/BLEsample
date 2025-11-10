@@ -98,32 +98,25 @@ function Leafony() {
         if (nextdata === "date") {
             state.date = data;
             nextdata = "lat";
-            counter++;
+            // counter++;
         } else if (nextdata === "lat") {
             state.lat = data;
             nextdata = "lon";
-            counter++;
+            // counter++;
         } else if (nextdata === "lon") {
             state.lng = data;
             gpsDataSet.push( state );
             nextdata = "date";
-            counter++;
-        }
-
-        if ( counter === 3 ) {
-            onStateChangeCallback( gpsDataSet.at(-1) );
-            counter = 0;
             state = {};
+            // counter++;
         }
 
-        // state.devn = deviceName;
-        // state.unin = uniqueName;
-        // state.temp = data[0];
-        // state.humd = data[1];
-        // state.illm = data[2];
-        // state.tilt = data[3];
-        // state.batt = data[4];
-        // state.dice = data[5];
+        // if ( counter === 3 ) {
+        if ( state.date === "00000000000000" && state.lat === "00.000000" && state.lng === "000.000000" ) {
+            onStateChangeCallback( gpsDataSet );
+            // counter = 0;
+        }
+
         
         if ( enSleep ) {
             sendCommand( 'STP' );
