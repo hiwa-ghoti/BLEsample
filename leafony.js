@@ -106,11 +106,12 @@ function Leafony() {
         } else if (nextdata === "lon") {
             state.lng = data;
             gpsDataSet.push( state );
-            nextdata = "date";
             state = {};
+            nextdata = "date";
             // counter++;
         }
 
+        //最後にすべて0のデータを送るためそれで配列を送る判定を行う
         // if ( counter === 3 ) {
         if ( state.date === "00000000000000" && state.lat === "00.000000" && state.lng === "000.000000" ) {
             onStateChangeCallback( gpsDataSet );
