@@ -98,24 +98,24 @@ function Leafony() {
         if (nextdata === "date") {
             state.date = data;
             nextdata = "lat";
-            // counter++;
+            counter++;
         } else if (nextdata === "lat") {
             state.lat = data;
             nextdata = "lon";
-            // counter++;
+            counter++;
         } else if (nextdata === "lon") {
             state.lng = data;
             gpsDataSet.push( state );
             state = {};
             nextdata = "date";
-            // counter++;
+            counter++;
         }
 
         //最後にすべて0のデータを送るためそれで配列を送る判定を行う
-        // if ( counter === 3 ) {
-        if ( state.date === "00000000000000" && state.lat === "00.000000" && state.lng === "000.000000" ) {
-            onStateChangeCallback( gpsDataSet );
-            // counter = 0;
+        if ( counter == 3 ) {
+        // if ( state.date === "00000000000000" && state.lat === "00.000000" && state.lng === "000.000000" ) {
+            onStateChangeCallback( gpsDataSet.at(-1) );
+            counter = 0;
         }
 
         

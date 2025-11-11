@@ -127,6 +127,14 @@ function updateTable ( state ) {
 		savedData.shift();
 	}
 	savedData.push( darray );
+	// textDeviceName.innerText = state.devn;
+	// textUniqueName.innerText = state.unin;
+	// textTilt.innerText = state.tilt;
+	// textBatt.innerText = state.batt;
+	// textDice.innerText = state.dice;
+
+	
+
 }
 
 
@@ -170,6 +178,6 @@ buttonDownload.addEventListener( 'click', function () {
 	downloader.href = url;
 	$( "#downloader" )[0].click();
 
-	delete csvText;
-	delete blob;
+	// delete csvText;
+	// delete blob;
 });
