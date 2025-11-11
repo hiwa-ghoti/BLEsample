@@ -89,41 +89,39 @@ function clearTable () {
 
 
 function updateTable ( state ) {
-	state.forEach(data => {
-		
-		let date = new Date();
-		let year     = String( date.getFullYear() );
-		let month    = ( '00' + ( date.getMonth() + 1 ) ).slice( -2 );
-		let day      = ( '00' + date.getDate() ).slice( -2 );
-		let hours    = ( '00' + date.getHours() ).slice( -2 );
-		let minutes  = ( '00' + date.getMinutes() ).slice( -2 );
-		let seconds  = ( '00' + date.getSeconds() ).slice( -2 );
-		let datetime = year + '/' + month + '/' + day + ' ' +
+	let date = new Date();
+	let year     = String( date.getFullYear() );
+	let month    = ( '00' + ( date.getMonth() + 1 ) ).slice( -2 );
+	let day      = ( '00' + date.getDate() ).slice( -2 );
+	let hours    = ( '00' + date.getHours() ).slice( -2 );
+	let minutes  = ( '00' + date.getMinutes() ).slice( -2 );
+	let seconds  = ( '00' + date.getSeconds() ).slice( -2 );
+	let datetime = year + '/' + month + '/' + day + ' ' +
 				   hours + ':' + minutes + ':' + seconds;
 
 	// textDeviceName.innerText = state.devn;
 	// textUniqueName.innerText = state.unin;
 	textDateTime.innerText = datetime;
-	textDate.innerText = data.date;
-	textLat.innerText = data.lat;
-	textLng.innerText = data.lng;
+	textDate.innerText = state.date;
+	textLat.innerText = state.lat;
+	textLng.innerText = state.lng;
 	// textTilt.innerText = state.tilt;
 	// textBatt.innerText = state.batt;
 	// textDice.innerText = state.dice;
-	
+
 	// Create array of reveived data and sensors data
 	let darray = new Array(
 		datetime,
 		// state.devn,
 		// state.unin,
-		data.date,
-		data.lat,
-		data.lng,
+		state.date,
+		state.lat,
+		state.lng,
 		// state.tilt,
 		// state.batt,
 		// state.dice
-	);
-	
+		);
+
 	// stack reveived data up to CSV_BUFF_LEN
 	if (savedData.length >= CSV_BUFF_LEN) {
 		savedData.shift();
@@ -134,7 +132,6 @@ function updateTable ( state ) {
 	// textTilt.innerText = state.tilt;
 	// textBatt.innerText = state.batt;
 	// textDice.innerText = state.dice;
-});
 
 	
 

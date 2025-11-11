@@ -114,7 +114,7 @@ function Leafony() {
         //最後にすべて0のデータを送るためそれで配列を送る判定を行う
         if ( counter == 3 ) {
         // if ( state.date === "00000000000000" && state.lat === "00.000000" && state.lng === "000.000000" ) {
-            onStateChangeCallback( gpsDataSet );
+            onStateChangeCallback( gpsDataSet.at(-1) );
             counter = 0;
         }
 
@@ -237,22 +237,9 @@ function Leafony() {
      */
     async function sendCommand( cmd ) {
 
-        // 接続状態と write characteristic の存在を確認してから送信する
-        if ( !char.write ) {
-            console.log( '> sendCommand: write characteristic not available' );
-            return;
-        }
-
-        if ( !device || !device.gatt || !device.gatt.connected ) {
-            console.log( '> sendCommand: device is not connected, cannot send:', cmd );
-            return;
-        }
-
-        try {
+        if ( char.write ) {
             let ArrayBuffer = new TextEncoder().encode( cmd );
             await char.write.writeValue( ArrayBuffer );
-        } catch ( error ) {
-            console.log( '> sendCommand error:', error );
         }
 
     }
