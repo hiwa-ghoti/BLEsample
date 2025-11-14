@@ -17,7 +17,6 @@ function Leafony() {
     let state = {};         //取得したデータを格納するオブジェクト
     let nextdata = "date";  //次に取得するデータの種類
     let counter = 0;        //データ取得回数カウンタデータ送信の条件管理に使う
-    let loopcounter = 0;   //ループ回数カウンタ
     
     // let state = {};
     let char = {};
@@ -110,21 +109,13 @@ function Leafony() {
             state = {};
             nextdata = "date";
             counter++;
-            if(state.date === "00000000000000"){
-                loopcounter++;
-                console.log( loopcounter );
-            }
-            else{
-                console.log(state.date);
-            }
         }
 
         //最後にすべて0のデータを送るためそれで配列を送る判定を行う
-        if ( counter == 3 && loopcounter <= 5 ) {
-        // if ( state.date == "00000000000000" || state.lat == "00.000000" || state.lng == "000.000000" ) {
+        if ( counter == 3 ) {
+        // if ( state.date === "00000000000000" && state.lat === "00.000000" && state.lng === "000.000000" ) {
             onStateChangeCallback( gpsDataSet );
             counter = 0;
-            console.log( "Data Sent" );
         }
 
         

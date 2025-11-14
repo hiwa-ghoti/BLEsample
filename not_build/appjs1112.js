@@ -101,7 +101,6 @@ function updateTable ( state ) {
 	hours + ':' + minutes + ':' + seconds;
 	
 	state.forEach(data => {
-	console.log( "state {" + data.date + ", " + data.lat + ", " + data.lng + "}" );
 	// textDeviceName.innerText = state.devn;
 	// textUniqueName.innerText = state.unin;
 	textDateTime.innerText = datetime;
